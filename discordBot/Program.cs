@@ -57,6 +57,11 @@ namespace discordBot
                             {
                                 await e.Channel.SendFile(returnMsg[1]);
                             }   
+                            // Mention back user that called command
+                            else if (returnMsg[0] == "m")
+                            {
+                                await e.Channel.SendMessage(e.Message.User.Mention + returnMsg[1]);
+                            }
                         }  
                     }
                     else // not parsing a command, but maybe a keyword

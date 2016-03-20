@@ -16,10 +16,12 @@ namespace discordBot
             string[] str_return = new string[2] { "c", " " };
 
             // remove the leading '!'
-            string parsedMsg = msg.TrimStart('!');
+            string[] parsedMsg = new string[1];
+            parsedMsg[0] = msg.TrimStart('!');  // remove the excalamation mark 
+            parsedMsg = parsedMsg[0].Split(' ');         // split apart in relation to spaces 
 
-            
-            switch (parsedMsg)
+            Console.WriteLine(parsedMsg[0]);
+            switch (parsedMsg[0])
             {
                 case "help":
                     str_return[0] = "w"; // return msg as whisper 
@@ -38,6 +40,26 @@ namespace discordBot
                 case "yay":
                     str_return[0] = "i"; // return msg as image
                     str_return[1] = "C:\\Users\\Gage\\Documents\\GitHub\\discordBot\\discordBot\\images\\yay.gif";
+                    break;
+                case "roll":
+                    if (parsedMsg.Length > 1)
+                    {
+                        Random rand = new Random();
+                        int maxVal = Int32.Parse(parsedMsg[1]);
+                        int randNum = rand.Next(maxVal);
+
+                        str_return[0] = "m"; // mention calling user
+                        str_return[1] = " rolled " + randNum.ToString() + " out of " + maxVal.ToString() ;
+                       
+                    }
+                    else
+                    {
+                        Random rand = new Random();
+                        int randNum = rand.Next(100);
+
+                        str_return[0] = "m"; // mention calling user
+                        str_return[1] = " rolled " + randNum.ToString() + " out of 100";
+                    }
                     break;
                 default:
                     return null;
