@@ -36,7 +36,7 @@ namespace discordBot
 
                         
                         // Parse message (returned as string || NULL if no command)
-                        string[] returnMsg = parse.ParseCommand(e.Message.Text);
+                        string[] returnMsg = parse.ParseCommand(e.Message.Text, e);
 
                         // If return message -> respond to channel or user
                         if (returnMsg != null)

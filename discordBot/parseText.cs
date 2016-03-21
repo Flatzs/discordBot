@@ -10,7 +10,7 @@ namespace discordBot
     public class parseText
     {
 
-        public string[] ParseCommand(string msg)
+        public string[] ParseCommand(string msg, MessageEventArgs e)
         {
             //Returns string array ["c"hannel" or "w"hisper , string message]
             string[] str_return = new string[2] { "c", " " };
@@ -35,7 +35,9 @@ namespace discordBot
                     break;
                 case "bunny":
                     str_return[0] = "i"; // return msg as image
-                    str_return[1] = "C:\\Users\\Gage\\Documents\\GitHub\\discordBot\\discordBot\\images\\bunny.jpeg";
+                    string envar = Environment.CurrentDirectory;
+
+                    str_return[1] = envar + "\\images\\bunny.jpeg";
                     break;
                 case "yay":
                     str_return[0] = "i"; // return msg as image
@@ -61,6 +63,13 @@ namespace discordBot
                         str_return[1] = " rolled " + randNum.ToString() + " out of 100";
                     }
                     break;
+                    //this is a for jason
+
+
+
+
+                    // gage
+
                 default:
                     return null;
                     //break;
