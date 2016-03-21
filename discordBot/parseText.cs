@@ -70,6 +70,14 @@ namespace discordBot
                         str_return[1] = " rolled " + randNum.ToString() + " out of 100";
                     }
                     break;
+                case "members":
+                    int totalMemCount = e.Server.Users.Count();
+                    int onlineMemCount = e.Server.Users.Count(x => x.Status == UserStatus.Online);
+                    str_return[1] = e.Server.Name + "\n\n" +
+                                    "Total members: " + totalMemCount + "\n" +
+                                    "Online members: " + onlineMemCount;
+
+                    break;
                 default:
                     return null;
                     //break;
