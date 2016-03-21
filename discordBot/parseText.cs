@@ -47,15 +47,13 @@ namespace discordBot
             string[] parsedMsg = new string[1];
             parsedMsg[0] = msg.TrimStart('!');  // remove the excalamation mark 
             parsedMsg = parsedMsg[0].Split(' ');         // split apart in relation to spaces 
-<<<<<<< HEAD
             
             Console.WriteLine(parsedMsg[0]);
-=======
+
 
             // echoes trimmed command to console for debug
             //Console.WriteLine(parsedMsg[0]);
 
->>>>>>> origin/master
             switch (parsedMsg[0])
             {
                 case "help":
@@ -111,7 +109,6 @@ namespace discordBot
                         str_return[1] = " rolled " + randNum.ToString() + " out of 100";
                     }
                     break;
-<<<<<<< HEAD
                 case "quiz":
                     if (!quizisrunning || (e.Message.Timestamp >= quizstartime.AddSeconds(25)))
                     {
@@ -121,7 +118,7 @@ namespace discordBot
                         
                         //Import the list of jokes from file and add them to a list
                         List<string[]> questionsandanswereslist = new List<string[]>();
-                        string[] temparray = System.IO.File.ReadAllLines("C:\\Users\\Jason\\Documents\\GitHub\\discordBot\\discordBot\\quizquestions\\questions.txt");
+                        string[] temparray = System.IO.File.ReadAllLines("C:\\Users\\Gage\\Documents\\GitHub\\discordBot\\discordBot\\quizquestions\\questions.txt");
                         foreach (string lines in temparray)
                         {
                             questionsandanswereslist.Add(lines.Split('`'));
@@ -140,21 +137,31 @@ namespace discordBot
                     }
                     
                     break;
-
                 case "answer":
                     string messagetext = e.Message.Text;
-                    string answer = messagetext.Remove(0, 8).ToLower();
-                    if(answer == questionsandanswers[1].ToLower() && quizisrunning && e.Message.Timestamp <= quizstartime.AddSeconds(25))
-                    {
-                        e.Channel.SendMessage("Congrats " + e.Message.User.Mention + ", You are correct!");
-                        randomindexnumber = 0;
-                        quizisrunning = false;
+                    string answer = " ";
+
+                    try {
+                        answer = messagetext.Remove(0, 8).ToLower();
+                    }catch (Exception){
+                        Console.WriteLine("!answer has no argument");
                     }
-                    else
+
+                    // if no exception
+                    if (answer != " ")
                     {
-                        return null;
+                        if (answer == questionsandanswers[1].ToLower() && quizisrunning && e.Message.Timestamp <= quizstartime.AddSeconds(25))
+                        {
+                            e.Channel.SendMessage("Congrats " + e.Message.User.Mention + ", You are correct!");
+                            randomindexnumber = 0;
+                            quizisrunning = false;
+                        }
+                        else
+                        {
+                            return null;
+                        }
                     }
-=======
+                    break;
                 case "members":
                     int totalMemCount = e.Server.Users.Count();
                     int onlineMemCount = e.Server.Users.Count(x => x.Status == UserStatus.Online);
@@ -174,7 +181,6 @@ namespace discordBot
                 case "test":
                     e.Channel.SendMessage("http://img1.123freevectors.com/wp-content/uploads/freevectorimage/happy-family-sitting-on-the-couch-free-vector-2189.jpg");
                     e.Message.Delete();
->>>>>>> origin/master
                     break;
                 default:
                     return null;
