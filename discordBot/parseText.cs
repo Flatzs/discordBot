@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 using Discord;
 
 namespace discordBot
@@ -10,16 +11,25 @@ namespace discordBot
     public class parseText
     {
 
+        //variables for the quiz game
+        private string[] questionsandanswers = { "" };
+        private bool quizisrunning = false;
+        private int randomindexnumber = 0;
+        private DateTime quizstartime;
+
         public string[] ParseCommand(string msg, MessageEventArgs e)
         {
             //Returns string array ["c"hannel" or "w"hisper , string message]
             string[] str_return = new string[2] { "c", " " };
 
+            
+            
+
             // remove the leading '!'
             string[] parsedMsg = new string[1];
             parsedMsg[0] = msg.TrimStart('!');  // remove the excalamation mark 
             parsedMsg = parsedMsg[0].Split(' ');         // split apart in relation to spaces 
-
+            
             Console.WriteLine(parsedMsg[0]);
             switch (parsedMsg[0])
             {
@@ -68,6 +78,49 @@ namespace discordBot
 
                         str_return[0] = "m"; // mention calling user
                         str_return[1] = " rolled " + randNum.ToString() + " out of 100";
+                    }
+                    break;
+                case "quiz":
+                    if (!quizisrunning || (e.Message.Timestamp >= quizstartime.AddSeconds(25)))
+                    {
+                        //Note the time of the start of the quiz
+                        quizstartime = e.Message.Timestamp;
+                        quizisrunning = true;
+                        
+                        //Import the list of jokes from file and add them to a list
+                        List<string[]> questionsandanswereslist = new List<string[]>();
+                        string[] temparray = System.IO.File.ReadAllLines("C:\\Users\\Jason\\Documents\\GitHub\\discordBot\\discordBot\\quizquestions\\questions.txt");
+                        foreach (string lines in temparray)
+                        {
+                            questionsandanswereslist.Add(lines.Split('`'));
+                        }
+
+                        //Select a new index from the list of jokes through random number generation.
+                        Random randomindexgenerator = new Random();
+                        randomindexnumber = randomindexgenerator.Next(questionsandanswereslist.Count());
+                        questionsandanswers = questionsandanswereslist.ElementAt(randomindexnumber);
+                        e.Channel.SendMessage("You have 25 seconds to get the right answer. To answer, type !answer followed by the answer. \n\n " + questionsandanswers[0] + " " +  questionsandanswers[1]);
+
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                    
+                    break;
+
+                case "answer":
+                    string messagetext = e.Message.Text;
+                    string answer = messagetext.Remove(0, 8).ToLower();
+                    if(answer == questionsandanswers[1].ToLower() && quizisrunning && e.Message.Timestamp <= quizstartime.AddSeconds(25))
+                    {
+                        e.Channel.SendMessage("Congrats " + e.Message.User.Mention + ", You are correct!");
+                        randomindexnumber = 0;
+                        quizisrunning = false;
+                    }
+                    else
+                    {
+                        return null;
                     }
                     break;
                 default:
