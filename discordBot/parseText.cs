@@ -4,14 +4,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Discord;
+using RedditSharp;
 
 namespace discordBot
 {
     public class parseText
     {
+        string[] jokeTitle = new string[40];
+        string[] jokeBody = new string[40];
+        string[] rule34Title = new string[40];
+        string[] rule34Body = new string[40];
+
+        public void Start()
+        {
+            Console.WriteLine("discordBot by Gage Langdon and Jason Odgers");
+            Console.WriteLine("Loading...");
+            getRedditJokes();
+            getRedditRule34();
+           
+        }
 
         public string[] ParseCommand(string msg, MessageEventArgs e)
         {
+
+            Random rand = new Random();
+            int n; // used for random numbers
+
             //Returns string array ["c"hannel" or "w"hisper , string message]
             string[] str_return = new string[2] { "c", " " };
 
@@ -20,7 +38,9 @@ namespace discordBot
             parsedMsg[0] = msg.TrimStart('!');  // remove the excalamation mark 
             parsedMsg = parsedMsg[0].Split(' ');         // split apart in relation to spaces 
 
-            Console.WriteLine(parsedMsg[0]);
+            // echoes trimmed command to console for debug
+            //Console.WriteLine(parsedMsg[0]);
+
             switch (parsedMsg[0])
             {
                 case "help":
@@ -42,10 +62,16 @@ namespace discordBot
                     str_return[0] = "i"; // return msg as image
                     str_return[1] = "C:\\Users\\Gage\\Documents\\GitHub\\discordBot\\images\\yay.gif";
                     break;
+                case "cuckme":
+                    //str_return[0] = "i"; // return msg as image
+                    //str_return[1] = "C:\\Users\\Gage\\Documents\\GitHub\\discordBot\\images\\cuck.gif";
+                    e.Channel.SendMessage(e.Message.User.Mention + " got cucked");
+                    e.Channel.SendFile("C:\\Users\\Gage\\Documents\\GitHub\\discordBot\\images\\cuck.jpg");
+                    break;
                 case "roll":
                     if (parsedMsg.Length > 1)
                     {
-                        Random rand = new Random();
+                        
                         int maxVal;
 
                         // see if user entered a valid number for the max value
@@ -63,7 +89,7 @@ namespace discordBot
                     }
                     else
                     {
-                        Random rand = new Random();
+
                         int randNum = rand.Next(100);
 
                         str_return[0] = "m"; // mention calling user
@@ -76,7 +102,19 @@ namespace discordBot
                     str_return[1] = e.Server.Name + "\n\n" +
                                     "Total members: " + totalMemCount + "\n" +
                                     "Online members: " + onlineMemCount;
-
+                    break;
+                case "joke":
+                    // return a random joke from the list
+                    n = rand.Next(jokeTitle.Length - 1);
+                    e.Channel.SendMessage(jokeTitle[n] + "\n\n" + jokeBody[n]);
+                    break;
+                case "rule34":
+                    n = rand.Next(rule34Title.Length - 1);
+                    e.Channel.SendMessage(rule34Title[n] + "\n\n" + rule34Body[n]);
+                    break;
+                case "test":
+                    e.Channel.SendMessage("http://img1.123freevectors.com/wp-content/uploads/freevectorimage/happy-family-sitting-on-the-couch-free-vector-2189.jpg");
+                    e.Message.Delete();
                     break;
                 default:
                     return null;
@@ -84,7 +122,10 @@ namespace discordBot
 
             }
 
-            
+            if (str_return[1] == " ")
+            {
+                return null;
+            }
             return str_return;
         }
 
@@ -94,7 +135,7 @@ namespace discordBot
             return " ";
         }
 
-        public string[] ParseMessage(string msg)
+        public string[] ParseMessage(string msg,MessageEventArgs e)
         {
             //Returns string array ["c"hannel" or "w"hisper , string message]
             string[] str_return = new string[2] { "c", " " };
@@ -104,15 +145,16 @@ namespace discordBot
 
             for (int i = 0; i < parsedMsg.Length; i++)
             {
-                Console.WriteLine(parsedMsg[i]);
+                // echoes message contents to console for debug purposes
+                //Console.WriteLine(parsedMsg[i]);
                 switch (parsedMsg[i])
                 {
-                    case "fag":
-                        str_return[0] = "c";
-                        str_return[1] = "fag";
+                    case "tts":
+                        e.Channel.SendTTSMessage("this should be spoken using text to speech");
                         return str_return;
                     case "jgi":
                         str_return[0] = "c";
+                        
                         str_return[1] = "JGI on y0 fo head!!!11";
                         return str_return;
                     default:
@@ -125,6 +167,50 @@ namespace discordBot
 
             return str_return;
         }
+
+
+        private void getRedditJokes()
+        {
+            Console.WriteLine("Caching /r/jokes");
+            Reddit reddit = new Reddit();
+
+            var subreddit = reddit.GetSubreddit("/r/jokes");
+
+            // get 20 of the current hot jokes
+            int i = 0;
+            foreach (var post in subreddit.Hot.Take(40))
+            {
+                jokeTitle[i] = post.Title.ToString();
+                if (post.SelfText.Any())
+                {
+                    jokeBody[i] = post.SelfText.ToString();
+                }
+                i++;
+            }
+        }
+
+        private void getRedditRule34()
+        {
+            Console.WriteLine("Caching /r/rule34");
+            Reddit reddit = new Reddit();
+
+            var subreddit = reddit.GetSubreddit("/r/rule34");
+
+            // get 20 of the current hot images
+            int i = 0;
+            foreach (var post in subreddit.Hot.Take(40))
+            {
+                rule34Title[i] = post.Title.ToString();
+                if (post.Url.AbsoluteUri.Any())
+                {
+                    rule34Body[i] = post.Url.AbsoluteUri.ToString();
+                }
+                i++;
+            }
+
+        }
+
+
 
 
 
