@@ -14,8 +14,10 @@ namespace discordBot
         static void Main(string[] args)
         {
             var client = new DiscordClient();
-            
             var parse = new parseText();
+
+            // Do the starting stuff for the commands
+            parse.Start();
 
             client.Connect("discordbot001@gmail.com", "gageandjason");
             client.Log.Message += (s, e) => Console.WriteLine($"[{e.Severity}] {e.Source}: {e.Message}");
@@ -66,7 +68,7 @@ namespace discordBot
                     }
                     else // not parsing a command, but maybe a keyword
                     {
-                        string[] returnMsg = parse.ParseMessage(e.Message.Text);
+                        string[] returnMsg = parse.ParseMessage(e.Message.Text, e);
 
                         if (returnMsg != null)
                         {
