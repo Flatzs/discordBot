@@ -81,6 +81,7 @@ namespace discordBot
 
                                         "When you type certain commands I might do something, Check out the commands you can use below\n\n" +
                                         "!help  - Recieve this help message\n" +
+                                        "!promo - tell members about me!\n" +
                                         "!jgi - ON YO FOHEAD\n" +
                                         "!roll [max] - default is out of 100\n" +
                                         "!bunny - meow\n" +
@@ -91,7 +92,8 @@ namespace discordBot
                                         "!cuckme - hope you like em big\n" +
                                         "!quiz - recieve a random trivia question\n" +
                                         "!members - number of users on server\n" +
-                                        "!g [search] - LET ME GOOGLE THAT FOR YOU" +
+                                        "!g [search] - LET ME GOOGLE THAT FOR YOU\n" +
+                                        "!dongers - RAISE EM\n" +
 
                                         "\n\n" +
                                         "Mr.Meeseeks is being developed by @Grits, pm feedback"
@@ -100,17 +102,17 @@ namespace discordBot
                         break;
                     case "bunny":
                         str_return[0] = "i"; // return msg as image
-                        str_return[1] = "C:\\Users\\Gage\\Documents\\GitHub\\discordBot\\images\\bunny.jpeg";
+                        str_return[1] = "E:\\Documents\\GitHub\\discordBot\\images\\bunny.jpeg";
                         break;
                     case "yay":
                         str_return[0] = "i"; // return msg as image
-                        str_return[1] = "C:\\Users\\Gage\\Documents\\GitHub\\discordBot\\images\\yay.gif";
+                        str_return[1] = "E:\\Documents\\GitHub\\discordBot\\images\\yay.gif";
                         break;
                     case "cuckme":
                         //str_return[0] = "i"; // return msg as image
                         //str_return[1] = "C:\\Users\\Gage\\Documents\\GitHub\\discordBot\\images\\cuck.gif";
                         e.Channel.SendMessage(e.Message.User.Mention + " got cucked");
-                        e.Channel.SendFile("C:\\Users\\Gage\\Documents\\GitHub\\discordBot\\images\\cuck.jpg");
+                        e.Channel.SendFile("E:\\Documents\\GitHub\\discordBot\\images\\cuck.jpg");
                         break;
                     case "roll":
                         if (parsedMsg.Length > 1)
@@ -151,7 +153,7 @@ namespace discordBot
 
                             //Import the list of jokes from file and add them to a list
                             List<string[]> questionsandanswereslist = new List<string[]>();
-                            string[] temparray = System.IO.File.ReadAllLines("C:\\Users\\Gage\\Documents\\GitHub\\discordBot\\discordBot\\quizquestions\\questions.txt");
+                            string[] temparray = System.IO.File.ReadAllLines("E:\\Documents\\GitHub\\discordBot\\discordBot\\quizquestions\\questions.txt");
                             foreach (string lines in temparray)
                             {
                                 questionsandanswereslist.Add(lines.Split('`'));
@@ -246,7 +248,7 @@ namespace discordBot
 
                         break;
                     case "jgi":
-                        e.Channel.SendFile("C:\\Users\\Gage\\Documents\\GitHub\\discordBot\\images\\jgi.png");
+                        e.Channel.SendFile("E:\\Documents\\GitHub\\discordBot\\images\\jgi.png");
                         break;
                     case "dongers":
                         n = rand.Next(dongers.Length - 1);
@@ -255,6 +257,9 @@ namespace discordBot
                     case "g":
                         e.Channel.SendMessage("Here you go " + "https://www.google.com/search?q=" + parsedMsg[1] + "+");
                         //e.Message.Delete();
+                        break;
+                    case "promo":
+                        e.Channel.SendFile("E:\\Documents\\GitHub\\discordBot\\images\\promo.jpg");
                         break;
                     default:
                         return null;
@@ -308,10 +313,9 @@ namespace discordBot
                         {
                             e.Channel.SendTTSMessage("brad is a faggot");
                         }
-                        return str_return;
+                        return null;
                     case "jgi":
                         str_return[0] = "c";
-                        
                         str_return[1] = "JGI on y0 fo head!!!11";
                         return str_return;
                     default:
