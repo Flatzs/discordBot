@@ -12,7 +12,12 @@ namespace discordBot
     public class parseText
     {
 
-        string wotd = "Norscout is THE GOAT"; // Word of the day
+        //string wotd = "Norscout is THE GOAT"; // Word of the day
+
+        string[] dongers = new string[] { "⊂(▀¯▀⊂)","ᕙ(˵ ಠ ਊ ಠ ˵)ᕗ","( ͡↑ ͜ʖ ͡↑)","┌༼◉ل͟◉༽┐",
+                                          "ᕕ( ՞ ᗜ ՞ )ᕗ","(ノ͡° ͜ʖ ͡°)ノ︵┻┻","╚═། ◑ ▃ ◑ །═╝","(V●ᴥ●V)",
+                                          "┌༼ – _ – ༽┐","⋋| ◉ ͟ʖ ◉ |⋌", "¯\\_| ಠ ∧ ಠ |_/¯", "┌[ ◔ ͜ ʖ ◔ ]┐"
+                                         };
 
 
         string[] jokeTitle = new string[40];
@@ -242,6 +247,10 @@ namespace discordBot
                         break;
                     case "jgi":
                         e.Channel.SendFile("C:\\Users\\Gage\\Documents\\GitHub\\discordBot\\images\\jgi.png");
+                        break;
+                    case "dongers":
+                        n = rand.Next(dongers.Length - 1);
+                        e.Channel.SendMessage(dongers[n]);
                         break;
                     case "g":
                         e.Channel.SendMessage("Here you go " + "https://www.google.com/search?q=" + parsedMsg[1] + "+");
