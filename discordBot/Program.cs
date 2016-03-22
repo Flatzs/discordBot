@@ -20,7 +20,10 @@ namespace discordBot
             parse.Start();
 
             // connect to discord
-            client.Connect("discordbot001@gmail.com", "gageandjason");
+
+            client.Connect("discordbot001@gmail.com", "gageandjason");  // RELEASE LOGIN     !NOTE: Only use this when working as this connects to the jgi channel
+
+            //client.Connect("discordbot002@gmail.com", "gageandjason");    // DEVELOPMENT LOGIN (this is for testing - logs into test channel)
 
             // recieve any system messages coming from discord
             client.Log.Message += (s, e) => Console.WriteLine($"[{e.Severity}] {e.Source}: {e.Message}");

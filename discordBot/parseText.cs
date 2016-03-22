@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using Discord;
 using RedditSharp;
+using Tweetinvi;
 
 namespace discordBot
 {
@@ -19,6 +20,27 @@ namespace discordBot
                                           "┌༼ – _ – ༽┐","⋋| ◉ ͟ʖ ◉ |⋌", "¯\\_| ಠ ∧ ಠ |_/¯", "┌[ ◔ ͜ ʖ ◔ ]┐"
                                          };
 
+        string[] lookAtMeImg = new string[] {"E:\\Documents\\GitHub\\discordBot\\images\\look.gif",
+                                             "E:\\Documents\\GitHub\\discordBot\\images\\look1.jpg",
+                                             "E:\\Documents\\GitHub\\discordBot\\images\\look2.jpg",
+                                             "E:\\Documents\\GitHub\\discordBot\\images\\look3.jpg",
+                                             "E:\\Documents\\GitHub\\discordBot\\images\\look4.jpg",
+                                             "E:\\Documents\\GitHub\\discordBot\\images\\look5.jpg",
+                                             "E:\\Documents\\GitHub\\discordBot\\images\\look6.jpg",
+                                             "E:\\Documents\\GitHub\\discordBot\\images\\look7.jpg",
+                                             "E:\\Documents\\GitHub\\discordBot\\images\\look8.jpg",
+                                             "E:\\Documents\\GitHub\\discordBot\\images\\look9.jpg",
+                                             "E:\\Documents\\GitHub\\discordBot\\images\\look10.jpg",
+                                             "E:\\Documents\\GitHub\\discordBot\\images\\look11.jpg",
+                                             "E:\\Documents\\GitHub\\discordBot\\images\\look12.jpg"};
+
+        string[] danceImg = new string[] { "E:\\Documents\\GitHub\\discordBot\\images\\dance.gif",
+                                           "E:\\Documents\\GitHub\\discordBot\\images\\dance1.gif",
+                                           "E:\\Documents\\GitHub\\discordBot\\images\\dance3.gif",
+                                           "E:\\Documents\\GitHub\\discordBot\\images\\dance4.gif",
+                                           "E:\\Documents\\GitHub\\discordBot\\images\\dance5.gif",
+                                           "E:\\Documents\\GitHub\\discordBot\\images\\dance6.gif",};
+
 
         string[] jokeTitle = new string[40];
         string[] jokeBody = new string[40];
@@ -27,15 +49,20 @@ namespace discordBot
         string[] rule34LOLTitle = new string[40];
         string[] rule34LOLBody = new string[40];
 
+       
+        string[] pornTweets = new string[40];
+
 
         public void Start()
         {
             // Initial loading 
             Console.WriteLine("discordBot by Gage Langdon and Jason Odgers");
             Console.WriteLine("Loading...");
+            getPornTweets();
             getRedditJokes();
             getRedditRule34();
             getRedditRule34LOL();
+
            
         }
 
@@ -51,6 +78,7 @@ namespace discordBot
 
             try {
                 Random rand = new Random();
+               
                 int n; // used for random numbers
 
                
@@ -90,10 +118,16 @@ namespace discordBot
                                         "!rule34 - recieve a random rule34 from /r/rule34 [only in NSFW channels]\n" +
                                         "!rule34lol - random league of legends rule34 from /r/rule34lol [only in NSFW channels]\n" +
                                         "!cuckme - hope you like em big\n" +
+                                        "!hug [@user] - cheer em up!\n" +
                                         "!quiz - recieve a random trivia question\n" +
                                         "!members - number of users on server\n" +
                                         "!g [search] - LET ME GOOGLE THAT FOR YOU\n" +
                                         "!dongers - RAISE EM\n" +
+                                        "!lookatme - LOOK AT ME!!!!11\n" +
+                                        "!dance - gnn tss gnn tss\n" +
+                                        "!porncomment - random porn comment\n" +
+                                        "!fite [@user] - fite me irl br0\n" +
+                                        "!tldr - TOO LONG DIDNT READ\n" +
 
                                         "\n\n" +
                                         "Mr.Meeseeks is being developed by @Grits, pm feedback"
@@ -261,19 +295,50 @@ namespace discordBot
                     case "promo":
                         e.Channel.SendFile("E:\\Documents\\GitHub\\discordBot\\images\\promo.jpg");
                         break;
+                    case "porncomment":
+                        n = rand.Next(pornTweets.Length - 1);
+                        e.Channel.SendMessage(pornTweets[n]);
+                        break;
+                    case "lookatme":
+                        n = rand.Next(lookAtMeImg.Length - 1);
+                        e.Channel.SendFile(lookAtMeImg[n]);
+                        break;
+                    case "dance":
+                        n = rand.Next(danceImg.Length - 1);
+                        e.Channel.SendFile(danceImg[n]);
+                        break;
+                    case "tldr":
+                        e.Channel.SendFile("E:\\Documents\\GitHub\\discordBot\\images\\tldr.gif");
+                        break;
+                    case "hug":
+                        e.Channel.SendMessage(e.Message.User.Mention + " hugged " + e.Message.MentionedUsers.First().Mention);
+                        break;
+                    case "fite":
+                        n = rand.Next(2);
+                        if (n == 0)
+                        {
+                            e.Channel.SendMessage(e.Message.User.Mention + " won the fite against " + e.Message.MentionedUsers.First().Mention);
+                        }
+                        else
+                        {
+                            e.Channel.SendMessage(e.Message.MentionedUsers.First().Mention + " won the fite against " + e.Message.User.Mention);
+                        }
+                        break;
                     default:
                         return null;
                         //break;
 
                 }
 
-                if (str_return[1] == " ")
-                {
-                    return null;
-                }
+                
             } catch (Exception)
             {
                 Console.WriteLine("ERROR: An exception occured in parseText.cs");
+            }
+
+            if (str_return[1] == " ")
+            {
+                return null;
             }
             return str_return;
         }
@@ -300,7 +365,7 @@ namespace discordBot
                 {
                     case "fag":
                         try{
-                            User u = e.Server.FindUsers("brad 👀#5595", true) as User;
+                            Discord.User u = e.Server.FindUsers("brad 👀", true) as Discord.User;
                             if (u.Name == "brad")
                             {
                                 e.Channel.SendTTSMessage(u.Mention + " is a faggot");
@@ -393,6 +458,32 @@ namespace discordBot
                 i++;
             }
 
+        }
+
+        private void getPornTweets()
+        {
+            Console.WriteLine("Caching porn comment tweets");
+
+            try {
+                // authenticate and connect to the twitter api
+                Auth.SetUserCredentials("5bzCIcNofQXZ8kpCkwYLNo9Pp",
+                    "DQ0YZLInDBUnWyCcte9KBs5G1wQriNSzAzCVsI3lG0LT9GXUW2",
+                    "712137448994648065-D2tmKQq0Njn2dR8vB1tnHCB7Kk0KKPi",
+                    "ct0WJYVEEAeXWYlzG52oAtvxz85QuCJindnI1VDUqCy6c");
+
+                // get the top 40 tweets
+                var tweets = Timeline.GetUserTimeline("wisewordsofporn", 40);
+
+                for (int i = 0; i < tweets.Count(); i++)
+                {
+                    pornTweets[i] = tweets.ElementAt(i).Text;
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("ERROR: exception thrown in getPornTweets()");
+            }
+            
         }
 
 
