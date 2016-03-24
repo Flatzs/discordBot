@@ -128,6 +128,7 @@ namespace discordBot
                                         "!porncomment - random porn comment\n" +
                                         "!fite [@user] - fite me irl br0\n" +
                                         "!tldr - TOO LONG DIDNT READ\n" +
+                                        "!jhinmain\n" +
 
                                         "\n\n" +
                                         "Mr.Meeseeks is being developed by @Grits, pm feedback"
@@ -298,6 +299,9 @@ namespace discordBot
                     case "porncomment":
                         n = rand.Next(pornTweets.Length - 1);
                         e.Channel.SendMessage(pornTweets[n]);
+                        break;
+                    case "jhinmain":
+                        e.Channel.SendMessage("http://i.imgur.com/Wt6mO78.gif");
                         break;
                     case "lookatme":
                         n = rand.Next(lookAtMeImg.Length - 1);
