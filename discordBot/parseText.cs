@@ -4,17 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-using Discord;
-using RedditSharp;
-using Tweetinvi;
+
+using Discord;      // discord api
+using RedditSharp;  // reddit api
+using Tweetinvi;    // twitter api
 
 namespace discordBot
 {
     public class parseText
     {
-
-    
-        
 
         string[] dongers = new string[] { "⊂(▀¯▀⊂)","ᕙ(˵ ಠ ਊ ಠ ˵)ᕗ","( ͡↑ ͜ʖ ͡↑)","┌༼◉ل͟◉༽┐",
                                           "ᕕ( ՞ ᗜ ՞ )ᕗ","(ノ͡° ͜ʖ ͡°)ノ︵┻┻","╚═། ◑ ▃ ◑ །═╝","(V●ᴥ●V)",
@@ -45,12 +43,6 @@ namespace discordBot
 
         string[] jokeTitle = new string[40];
         string[] jokeBody = new string[40];
-        //string[] rule34Title = new string[40];
-        //string[] rule34Body = new string[40];
-        //string[] rule34LOLTitle = new string[40];
-        //string[] rule34LOLBody = new string[40];
-
-       
         string[] pornTweets = new string[40];
 
 
@@ -60,11 +52,7 @@ namespace discordBot
             Console.WriteLine("discordBot by Gage Langdon and Jason Odgers");
             Console.WriteLine("Loading...");
             getPornTweets();
-            getRedditJokes();
-            //getRedditRule34();
-            //getRedditRule34LOL();
-
-           
+            getRedditJokes();  
         }
 
         //variables for the quiz game
@@ -75,25 +63,22 @@ namespace discordBot
 
         public string[] ParseCommand(string msg, MessageEventArgs e)
         {
+            // c = command
             string[] str_return = new string[2] { "c", " " };
 
+            // main exception catch
             try {
-                Random rand = new Random();
-               
-                int n; // used for random numbers
 
+                Random rand = new Random();
+                int n; // used for random numbers
 
                 // remove the leading '!'
                 string[] parsedMsg = new string[1];
-                parsedMsg[0] = msg.TrimStart('!');  // remove the excalamation mark 
-                parsedMsg = parsedMsg[0].Split(' ');         // split apart in relation to spaces 
+                parsedMsg[0] = msg.TrimStart('!');    // remove the excalamation mark 
+                parsedMsg = parsedMsg[0].Split(' ');  // split apart in relation to spaces 
 
-                // Console.WriteLine(parsedMsg[0]);
 
                 parsedMsg[0] = parsedMsg[0].ToLower();
-
-                // echoes trimmed command to console for debug
-                //Console.WriteLine(parsedMsg[0]);
 
                 switch (parsedMsg[0])
                 {
@@ -106,16 +91,13 @@ namespace discordBot
                                         "When you type certain commands I might do something, Check out the commands you can use below\n\n" +
                                         "!help  - Recieve this help message\n" +
                                         "!promo - tell members about me!\n" +
-                                        //"!jgi - ON YO FOHEAD\n" +
                                         "!roll [max] - default is out of 100\n" +
                                         "!bunny - meow\n" +
                                         "!yay - celebrate!\n" +
                                         "!joke - recieve a random joke from /r/jokes\n" +
-                                        //"!rule34 - recieve a random rule34 from /r/rule34 [only in NSFW channels]\n" +
-                                        //"!rule34lol - random league of legends rule34 from /r/rule34lol [only in NSFW channels]\n" +
                                         "!cuckme - hope you like em big\n" +
                                         "!hug [@user] - cheer em up!\n" +
-                                        "!quiz - recieve a random trivia question\n" +
+                                        "!quiz - recieve a random trivia question (@tapetape)\n" +
                                         "!members - number of users on server\n" +
                                         "!g [search] - LET ME GOOGLE THAT FOR YOU\n" +
                                         "!dongers - RAISE EM\n" +
@@ -124,27 +106,29 @@ namespace discordBot
                                         "!porncomment - random porn comment\n" +
                                         "!fite [@user] - fite me irl br0\n" +
                                         "!tldr - TOO LONG DIDNT READ\n" +
-                                        //"!jhinmain\n" +
 
                                         "\n\n" +
                                         "Mr.Meeseeks is being developed by @Grits, pm feedback"
                                         );
 
                         break;
+
                     case "bunny":
                         str_return[0] = "i"; // return msg as image
                         str_return[1] = "C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\bunny.jpeg";
                         break;
+
                     case "yay":
                         str_return[0] = "i"; // return msg as image
                         str_return[1] = "C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\yay.gif";
+                        e.Channel.SendFile("C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\cuck.jpg");
                         break;
+
                     case "cuckme":
-                        //str_return[0] = "i"; // return msg as image
-                        //str_return[1] = "C:\\Users\\Gage\\Documents\\GitHub\\discordBot\\images\\cuck.gif";
                         e.Channel.SendMessage(e.Message.User.Mention + " got cucked");
                         e.Channel.SendFile("C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\cuck.jpg");
                         break;
+
                     case "roll":
                         if (parsedMsg.Length > 1)
                         {
@@ -162,9 +146,6 @@ namespace discordBot
 
                             str_return[0] = "m"; // mention calling user
                             str_return[1] = " rolled " + randNum.ToString() + " out of " + maxVal.ToString();
-
-
-
                         }
                         else
                         {
@@ -175,6 +156,8 @@ namespace discordBot
                             str_return[1] = " rolled " + randNum.ToString() + " out of 100";
                         }
                         break;
+
+                    //  Quiz and Answer wrote by Jason Odgers
                     case "quiz":
                         if (!quizisrunning || (e.Message.Timestamp >= quizstartime.AddSeconds(25)))
                         {
@@ -204,6 +187,8 @@ namespace discordBot
                         }
 
                         break;
+
+                    //  Quiz and Answer wrote by Jason Odgers
                     case "answer":
                         if (quizisrunning) {
                             string answer = " ";
@@ -238,6 +223,7 @@ namespace discordBot
 
 
                         break;
+
                     case "members":
                         int totalMemCount = e.Server.Users.Count();
                         int onlineMemCount = e.Server.Users.Count(x => x.Status == UserStatus.Online);
@@ -245,71 +231,57 @@ namespace discordBot
                                         "Total members: " + totalMemCount + "\n" +
                                         "Online members: " + onlineMemCount;
                         break;
+
                     case "joke":
                         // return a random joke from the list
                         n = rand.Next(jokeTitle.Length - 1);
                         e.Channel.SendMessage(jokeTitle[n] + "\n\n" + jokeBody[n]);
                         break;
-                    //case "rule34":
-                    //    if (e.Message.Channel.Id == 152880849367465995) {
-                    //        n = rand.Next(rule34Title.Length - 1);
-                    //        e.Channel.SendMessage(rule34Title[n] + "\n\n" + rule34Body[n]);
-                    //    }
-                    //    else
-                    //    {
-                    //        e.Channel.SendMessage("NSFW commands are not allowed here " + e.Message.User.Mention);
-                    //        //Console.WriteLine(e.Message.User + " attempted to call a NSFW command in channel: " + e.Message.Channel.Name);
-                    //        // Console.WriteLine(e.Message.Channel.Id);
-                    //    }
 
-                    //    break;
-                    //case "rule34lol":
-                    //    if (e.Message.Channel.Id == 152880849367465995)
-                    //    {
-                    //        n = rand.Next(rule34Title.Length - 1);
-                    //        e.Channel.SendMessage(rule34LOLTitle[n] + "\n\n" + rule34LOLBody[n]);
-                    //    }
-                    //    else
-                    //    {
-
-                    //        e.Channel.SendMessage("NSFW commands are not allowed here " + e.Message.User.Mention);
-                    //        // Console.WriteLine(e.Message.User + " attempted to call a NSFW command in channel: " + e.Message.Channel.Name);
-                    //        // Console.WriteLine(e.Message.Channel.Id);
-                    //    }
-
-                    //    break;
-                    case "jgi":
-                        e.Channel.SendFile("C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\jgi.png");
-                        break;
                     case "dongers":
                         n = rand.Next(dongers.Length - 1);
                         e.Channel.SendMessage(dongers[n]);
                         break;
+
                     case "g":
-                        e.Channel.SendMessage("Here you go " + "https://www.google.com/search?q=" + parsedMsg[1] + "+");
-                        //e.Message.Delete();
+                        e.Channel.SendMessage("Here you go ");
+                        string link = "https://www.google.com/search?q=";
+
+                        for (int i = 1; i < parsedMsg.Length; i++)
+                        {
+                            link = link + parsedMsg[i] + "+";
+                        }
+
+                        e.Channel.SendMessage(link);
                         break;
+
                     case "promo":
                         e.Channel.SendFile("C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\promo.jpg");
                         break;
+
                     case "porncomment":
                         n = rand.Next(pornTweets.Length - 1);
                         e.Channel.SendMessage(pornTweets[n]);
                         break;
+
                     case "lookatme":
                         n = rand.Next(lookAtMeImg.Length - 1);
                         e.Channel.SendFile(lookAtMeImg[n]);
                         break;
+
                     case "dance":
                         n = rand.Next(danceImg.Length - 1);
                         e.Channel.SendFile(danceImg[n]);
                         break;
+
                     case "tldr":
                         e.Channel.SendFile("C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\tldr.gif");
                         break;
+
                     case "hug":
                         e.Channel.SendMessage(e.Message.User.Mention + " hugged " + e.Message.MentionedUsers.First().Mention);
                         break;
+
                     case "fite":
                         n = rand.Next(2);
                         if (n == 0)
@@ -358,6 +330,7 @@ namespace discordBot
             return str_return;
         }
 
+        // use for mentions of users
         public string ParseCommand(string msg, Discord.User[] user)
         {
 
@@ -366,7 +339,7 @@ namespace discordBot
 
         public string[] ParseMessage(string msg,MessageEventArgs e)
         {
-            //Returns string array ["c"hannel" or "w"hisper , string message]
+
             string[] str_return = new string[2] { "c", " " };
 
             string[] parsedMsg = msg.Split(' ');
@@ -414,47 +387,6 @@ namespace discordBot
             }
         }
 
-        //private void getRedditRule34()
-        //{
-        //    Console.WriteLine("Caching /r/rule34");
-        //    Reddit reddit = new Reddit();
-
-        //    var subreddit = reddit.GetSubreddit("/r/rule34");
-
-        //    // get 20 of the current hot images
-        //    int i = 0;
-        //    foreach (var post in subreddit.Hot.Take(40))
-        //    {
-        //        rule34Title[i] = post.Title.ToString();
-        //        if (post.Url.AbsoluteUri.Any())
-        //        {
-        //            rule34Body[i] = post.Url.AbsoluteUri.ToString();
-        //        }
-        //        i++;
-        //    }
-
-        //}
-
-        //private void getRedditRule34LOL()
-        //{
-        //    Console.WriteLine("Caching /r/Rule34LoL");
-        //    Reddit reddit = new Reddit();
-
-        //    var subreddit = reddit.GetSubreddit("/r/Rule34LoL");
-
-        //    // get 20 of the current hot images
-        //    int i = 0;
-        //    foreach (var post in subreddit.Hot.Take(40))
-        //    {
-        //        rule34LOLTitle[i] = post.Title.ToString();
-        //        if (post.Url.AbsoluteUri.Any())
-        //        {
-        //            rule34LOLBody[i] = post.Url.AbsoluteUri.ToString();
-        //        }
-        //        i++;
-        //    }
-
-        //}
 
         private void getPornTweets()
         {
