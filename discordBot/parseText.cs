@@ -13,41 +13,42 @@ namespace discordBot
     public class parseText
     {
 
-        //string wotd = "Norscout is THE GOAT"; // Word of the day
+    
+        
 
         string[] dongers = new string[] { "⊂(▀¯▀⊂)","ᕙ(˵ ಠ ਊ ಠ ˵)ᕗ","( ͡↑ ͜ʖ ͡↑)","┌༼◉ل͟◉༽┐",
                                           "ᕕ( ՞ ᗜ ՞ )ᕗ","(ノ͡° ͜ʖ ͡°)ノ︵┻┻","╚═། ◑ ▃ ◑ །═╝","(V●ᴥ●V)",
                                           "┌༼ – _ – ༽┐","⋋| ◉ ͟ʖ ◉ |⋌", "¯\\_| ಠ ∧ ಠ |_/¯", "┌[ ◔ ͜ ʖ ◔ ]┐"
                                          };
 
-        string[] lookAtMeImg = new string[] {"E:\\Documents\\GitHub\\discordBot\\images\\look.gif",
-                                             "E:\\Documents\\GitHub\\discordBot\\images\\look1.jpg",
-                                             "E:\\Documents\\GitHub\\discordBot\\images\\look2.jpg",
-                                             "E:\\Documents\\GitHub\\discordBot\\images\\look3.jpg",
-                                             "E:\\Documents\\GitHub\\discordBot\\images\\look4.jpg",
-                                             "E:\\Documents\\GitHub\\discordBot\\images\\look5.jpg",
-                                             "E:\\Documents\\GitHub\\discordBot\\images\\look6.jpg",
-                                             "E:\\Documents\\GitHub\\discordBot\\images\\look7.jpg",
-                                             "E:\\Documents\\GitHub\\discordBot\\images\\look8.jpg",
-                                             "E:\\Documents\\GitHub\\discordBot\\images\\look9.jpg",
-                                             "E:\\Documents\\GitHub\\discordBot\\images\\look10.jpg",
-                                             "E:\\Documents\\GitHub\\discordBot\\images\\look11.jpg",
-                                             "E:\\Documents\\GitHub\\discordBot\\images\\look12.jpg"};
+        string[] lookAtMeImg = new string[] {"C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\look.gif",
+                                             "C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\look1.jpg",
+                                             "C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\look2.jpg",
+                                             "C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\look3.jpg",
+                                             "C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\look4.jpg",
+                                             "C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\look5.jpg",
+                                             "C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\look6.jpg",
+                                             "C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\look7.jpg",
+                                             "C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\look8.jpg",
+                                             "C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\look9.jpg",
+                                             "C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\look10.jpg",
+                                             "C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\look11.jpg",
+                                             "C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\look12.jpg"};
 
-        string[] danceImg = new string[] { "E:\\Documents\\GitHub\\discordBot\\images\\dance.gif",
-                                           "E:\\Documents\\GitHub\\discordBot\\images\\dance1.gif",
-                                           "E:\\Documents\\GitHub\\discordBot\\images\\dance3.gif",
-                                           "E:\\Documents\\GitHub\\discordBot\\images\\dance4.gif",
-                                           "E:\\Documents\\GitHub\\discordBot\\images\\dance5.gif",
-                                           "E:\\Documents\\GitHub\\discordBot\\images\\dance6.gif",};
+        string[] danceImg = new string[] { "C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\dance.gif",
+                                           "C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\dance1.gif",
+                                           "C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\dance3.gif",
+                                           "C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\dance4.gif",
+                                           "C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\dance5.gif",
+                                           "C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\dance6.gif",};
 
 
         string[] jokeTitle = new string[40];
         string[] jokeBody = new string[40];
-        string[] rule34Title = new string[40];
-        string[] rule34Body = new string[40];
-        string[] rule34LOLTitle = new string[40];
-        string[] rule34LOLBody = new string[40];
+        //string[] rule34Title = new string[40];
+        //string[] rule34Body = new string[40];
+        //string[] rule34LOLTitle = new string[40];
+        //string[] rule34LOLBody = new string[40];
 
        
         string[] pornTweets = new string[40];
@@ -60,8 +61,8 @@ namespace discordBot
             Console.WriteLine("Loading...");
             getPornTweets();
             getRedditJokes();
-            getRedditRule34();
-            getRedditRule34LOL();
+            //getRedditRule34();
+            //getRedditRule34LOL();
 
            
         }
@@ -80,11 +81,6 @@ namespace discordBot
                 Random rand = new Random();
                
                 int n; // used for random numbers
-
-               
-                
-
-
 
 
                 // remove the leading '!'
@@ -110,13 +106,13 @@ namespace discordBot
                                         "When you type certain commands I might do something, Check out the commands you can use below\n\n" +
                                         "!help  - Recieve this help message\n" +
                                         "!promo - tell members about me!\n" +
-                                        "!jgi - ON YO FOHEAD\n" +
+                                        //"!jgi - ON YO FOHEAD\n" +
                                         "!roll [max] - default is out of 100\n" +
                                         "!bunny - meow\n" +
                                         "!yay - celebrate!\n" +
                                         "!joke - recieve a random joke from /r/jokes\n" +
-                                        "!rule34 - recieve a random rule34 from /r/rule34 [only in NSFW channels]\n" +
-                                        "!rule34lol - random league of legends rule34 from /r/rule34lol [only in NSFW channels]\n" +
+                                        //"!rule34 - recieve a random rule34 from /r/rule34 [only in NSFW channels]\n" +
+                                        //"!rule34lol - random league of legends rule34 from /r/rule34lol [only in NSFW channels]\n" +
                                         "!cuckme - hope you like em big\n" +
                                         "!hug [@user] - cheer em up!\n" +
                                         "!quiz - recieve a random trivia question\n" +
@@ -128,7 +124,7 @@ namespace discordBot
                                         "!porncomment - random porn comment\n" +
                                         "!fite [@user] - fite me irl br0\n" +
                                         "!tldr - TOO LONG DIDNT READ\n" +
-                                        "!jhinmain\n" +
+                                        //"!jhinmain\n" +
 
                                         "\n\n" +
                                         "Mr.Meeseeks is being developed by @Grits, pm feedback"
@@ -137,17 +133,17 @@ namespace discordBot
                         break;
                     case "bunny":
                         str_return[0] = "i"; // return msg as image
-                        str_return[1] = "E:\\Documents\\GitHub\\discordBot\\images\\bunny.jpeg";
+                        str_return[1] = "C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\bunny.jpeg";
                         break;
                     case "yay":
                         str_return[0] = "i"; // return msg as image
-                        str_return[1] = "E:\\Documents\\GitHub\\discordBot\\images\\yay.gif";
+                        str_return[1] = "C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\yay.gif";
                         break;
                     case "cuckme":
                         //str_return[0] = "i"; // return msg as image
                         //str_return[1] = "C:\\Users\\Gage\\Documents\\GitHub\\discordBot\\images\\cuck.gif";
                         e.Channel.SendMessage(e.Message.User.Mention + " got cucked");
-                        e.Channel.SendFile("E:\\Documents\\GitHub\\discordBot\\images\\cuck.jpg");
+                        e.Channel.SendFile("C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\cuck.jpg");
                         break;
                     case "roll":
                         if (parsedMsg.Length > 1)
@@ -188,7 +184,7 @@ namespace discordBot
 
                             //Import the list of jokes from file and add them to a list
                             List<string[]> questionsandanswereslist = new List<string[]>();
-                            string[] temparray = System.IO.File.ReadAllLines("E:\\Documents\\GitHub\\discordBot\\discordBot\\quizquestions\\questions.txt");
+                            string[] temparray = System.IO.File.ReadAllLines("C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\discordBot\\quizquestions\\questions.txt");
                             foreach (string lines in temparray)
                             {
                                 questionsandanswereslist.Add(lines.Split('`'));
@@ -254,36 +250,36 @@ namespace discordBot
                         n = rand.Next(jokeTitle.Length - 1);
                         e.Channel.SendMessage(jokeTitle[n] + "\n\n" + jokeBody[n]);
                         break;
-                    case "rule34":
-                        if (e.Message.Channel.Id == 152880849367465995) {
-                            n = rand.Next(rule34Title.Length - 1);
-                            e.Channel.SendMessage(rule34Title[n] + "\n\n" + rule34Body[n]);
-                        }
-                        else
-                        {
-                            e.Channel.SendMessage("NSFW commands are not allowed here " + e.Message.User.Mention);
-                            //Console.WriteLine(e.Message.User + " attempted to call a NSFW command in channel: " + e.Message.Channel.Name);
-                            // Console.WriteLine(e.Message.Channel.Id);
-                        }
+                    //case "rule34":
+                    //    if (e.Message.Channel.Id == 152880849367465995) {
+                    //        n = rand.Next(rule34Title.Length - 1);
+                    //        e.Channel.SendMessage(rule34Title[n] + "\n\n" + rule34Body[n]);
+                    //    }
+                    //    else
+                    //    {
+                    //        e.Channel.SendMessage("NSFW commands are not allowed here " + e.Message.User.Mention);
+                    //        //Console.WriteLine(e.Message.User + " attempted to call a NSFW command in channel: " + e.Message.Channel.Name);
+                    //        // Console.WriteLine(e.Message.Channel.Id);
+                    //    }
 
-                        break;
-                    case "rule34lol":
-                        if (e.Message.Channel.Id == 152880849367465995)
-                        {
-                            n = rand.Next(rule34Title.Length - 1);
-                            e.Channel.SendMessage(rule34LOLTitle[n] + "\n\n" + rule34LOLBody[n]);
-                        }
-                        else
-                        {
+                    //    break;
+                    //case "rule34lol":
+                    //    if (e.Message.Channel.Id == 152880849367465995)
+                    //    {
+                    //        n = rand.Next(rule34Title.Length - 1);
+                    //        e.Channel.SendMessage(rule34LOLTitle[n] + "\n\n" + rule34LOLBody[n]);
+                    //    }
+                    //    else
+                    //    {
 
-                            e.Channel.SendMessage("NSFW commands are not allowed here " + e.Message.User.Mention);
-                            // Console.WriteLine(e.Message.User + " attempted to call a NSFW command in channel: " + e.Message.Channel.Name);
-                            // Console.WriteLine(e.Message.Channel.Id);
-                        }
+                    //        e.Channel.SendMessage("NSFW commands are not allowed here " + e.Message.User.Mention);
+                    //        // Console.WriteLine(e.Message.User + " attempted to call a NSFW command in channel: " + e.Message.Channel.Name);
+                    //        // Console.WriteLine(e.Message.Channel.Id);
+                    //    }
 
-                        break;
+                    //    break;
                     case "jgi":
-                        e.Channel.SendFile("E:\\Documents\\GitHub\\discordBot\\images\\jgi.png");
+                        e.Channel.SendFile("C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\jgi.png");
                         break;
                     case "dongers":
                         n = rand.Next(dongers.Length - 1);
@@ -294,14 +290,11 @@ namespace discordBot
                         //e.Message.Delete();
                         break;
                     case "promo":
-                        e.Channel.SendFile("E:\\Documents\\GitHub\\discordBot\\images\\promo.jpg");
+                        e.Channel.SendFile("C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\promo.jpg");
                         break;
                     case "porncomment":
                         n = rand.Next(pornTweets.Length - 1);
                         e.Channel.SendMessage(pornTweets[n]);
-                        break;
-                    case "jhinmain":
-                        e.Channel.SendMessage("http://i.imgur.com/Wt6mO78.gif");
                         break;
                     case "lookatme":
                         n = rand.Next(lookAtMeImg.Length - 1);
@@ -312,7 +305,7 @@ namespace discordBot
                         e.Channel.SendFile(danceImg[n]);
                         break;
                     case "tldr":
-                        e.Channel.SendFile("E:\\Documents\\GitHub\\discordBot\\images\\tldr.gif");
+                        e.Channel.SendFile("C:\\Users\\gagel\\Documents\\GitHub\\discordBot\\images\\tldr.gif");
                         break;
                     case "hug":
                         e.Channel.SendMessage(e.Message.User.Mention + " hugged " + e.Message.MentionedUsers.First().Mention);
@@ -328,14 +321,32 @@ namespace discordBot
                             e.Channel.SendMessage(e.Message.MentionedUsers.First().Mention + " won the fite against " + e.Message.User.Mention);
                         }
                         break;
+
+                    case "clear":
+
+                       List<Discord.Message> m = e.Channel.Messages.ToList<Discord.Message> ();
+                       int numMessages = m.Count();
+
+                       string channelname = e.Channel.Name;
+                       e.Server.GetChannel(e.Channel.Id).Delete();
+                       e.Server.CreateChannel(channelname, ChannelType.Text);
+                       List<Discord.Channel> newChannel = e.Server.FindChannels(channelname).ToList<Discord.Channel>();
+
+                       // should only be one but the api pulls a list
+                       foreach (Discord.Channel c in newChannel)
+                       {
+                           e.Server.GetChannel(c.Id).SendMessage(numMessages + " messages were deleted");
+                       }
+
+                       Console.WriteLine(numMessages + " messages were deleted");
+                       break;
+
                     default:
+
                         return null;
-                        //break;
-
                 }
-
-                
-            } catch (Exception)
+            }
+            catch (Exception)
             {
                 Console.WriteLine("ERROR: An exception occured in parseText.cs");
             }
@@ -367,26 +378,7 @@ namespace discordBot
                 //Console.WriteLine(parsedMsg[i]);
                 switch (parsedMsg[i])
                 {
-                    case "fag":
-                        try{
-                            Discord.User u = e.Server.FindUsers("brad 👀", true) as Discord.User;
-                            if (u.Name == "brad")
-                            {
-                                e.Channel.SendTTSMessage(u.Mention + " is a faggot");
-                            }
-                            else
-                            {
-                                e.Channel.SendTTSMessage("brad is a faggot");
-                            }
-                        }catch (Exception)
-                        {
-                            e.Channel.SendTTSMessage("brad is a faggot");
-                        }
-                        return null;
-                    case "jgi":
-                        str_return[0] = "c";
-                        str_return[1] = "JGI on y0 fo head!!!11";
-                        return str_return;
+
                     default:
                         str_return[0] = null;
                         break;
@@ -422,47 +414,47 @@ namespace discordBot
             }
         }
 
-        private void getRedditRule34()
-        {
-            Console.WriteLine("Caching /r/rule34");
-            Reddit reddit = new Reddit();
+        //private void getRedditRule34()
+        //{
+        //    Console.WriteLine("Caching /r/rule34");
+        //    Reddit reddit = new Reddit();
 
-            var subreddit = reddit.GetSubreddit("/r/rule34");
+        //    var subreddit = reddit.GetSubreddit("/r/rule34");
 
-            // get 20 of the current hot images
-            int i = 0;
-            foreach (var post in subreddit.Hot.Take(40))
-            {
-                rule34Title[i] = post.Title.ToString();
-                if (post.Url.AbsoluteUri.Any())
-                {
-                    rule34Body[i] = post.Url.AbsoluteUri.ToString();
-                }
-                i++;
-            }
+        //    // get 20 of the current hot images
+        //    int i = 0;
+        //    foreach (var post in subreddit.Hot.Take(40))
+        //    {
+        //        rule34Title[i] = post.Title.ToString();
+        //        if (post.Url.AbsoluteUri.Any())
+        //        {
+        //            rule34Body[i] = post.Url.AbsoluteUri.ToString();
+        //        }
+        //        i++;
+        //    }
 
-        }
+        //}
 
-        private void getRedditRule34LOL()
-        {
-            Console.WriteLine("Caching /r/Rule34LoL");
-            Reddit reddit = new Reddit();
+        //private void getRedditRule34LOL()
+        //{
+        //    Console.WriteLine("Caching /r/Rule34LoL");
+        //    Reddit reddit = new Reddit();
 
-            var subreddit = reddit.GetSubreddit("/r/Rule34LoL");
+        //    var subreddit = reddit.GetSubreddit("/r/Rule34LoL");
 
-            // get 20 of the current hot images
-            int i = 0;
-            foreach (var post in subreddit.Hot.Take(40))
-            {
-                rule34LOLTitle[i] = post.Title.ToString();
-                if (post.Url.AbsoluteUri.Any())
-                {
-                    rule34LOLBody[i] = post.Url.AbsoluteUri.ToString();
-                }
-                i++;
-            }
+        //    // get 20 of the current hot images
+        //    int i = 0;
+        //    foreach (var post in subreddit.Hot.Take(40))
+        //    {
+        //        rule34LOLTitle[i] = post.Title.ToString();
+        //        if (post.Url.AbsoluteUri.Any())
+        //        {
+        //            rule34LOLBody[i] = post.Url.AbsoluteUri.ToString();
+        //        }
+        //        i++;
+        //    }
 
-        }
+        //}
 
         private void getPornTweets()
         {
@@ -489,6 +481,7 @@ namespace discordBot
             }
             
         }
+
 
 
 

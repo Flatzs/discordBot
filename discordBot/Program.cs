@@ -77,21 +77,6 @@ namespace discordBot
                         {
                             string[] returnMsg = parse.ParseMessage(e.Message.Text, e);
 
-                            if (returnMsg != null)
-                            {
-                                if (returnMsg[0] == "c")
-                                {
-                                    if (returnMsg[1] == "fag")
-                                    {
-                                        await e.Channel.SendTTSMessage("brad is a faggot");
-                                    }
-                                    else
-                                        await e.Channel.SendTTSMessage(returnMsg[1]);
-                                }
-                            }
-
-
-
                         }
                     }
                 }catch (Exception)
